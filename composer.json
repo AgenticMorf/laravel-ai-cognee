@@ -1,0 +1,28 @@
+{
+    "name": "agenticmorf/laravel-ai-cognee",
+    "description": "Cognee integration for Laravel AI: RAG, conversation store, and content ingestion",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "laravel/ai": "^0.2",
+        "laravel/framework": "^11|^12",
+        "agenticmorf/laravel-ai-model-manager": "*"
+    },
+    "suggest": {
+        "agenticmorf/fluxui-chat": "For RAG context provider integration"
+    },
+    "autoload": {
+        "psr-4": {
+            "AgenticMorf\\LaravelAICognee\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AgenticMorf\\LaravelAICognee\\LaravelAICogneeServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}

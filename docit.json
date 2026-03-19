@@ -1,0 +1,12 @@
+{
+  "order": ["index", "installation", "configuration", "usage"],
+  "labels": {
+    "index": "Guide",
+    "installation": "Installation",
+    "configuration": "Configuration",
+    "usage": "Usage"
+  },
+  "siteName": "Laravel AI Cognee",
+  "githubUrl": "https://github.com/AgenticMorf/laravel-ai-cognee",
+  "editBaseUrl": "https://github.com/AgenticMorf/laravel-ai-cognee/edit/main"
+}

@@ -1,5 +1,9 @@
 {
     "name": "agenticmorf/laravel-ai-cognee",
+    "homepage": "https://github.com/AgenticMorf/laravel-ai-cognee",
+    "support": {
+        "source": "https://github.com/AgenticMorf/laravel-ai-cognee"
+    },
     "description": "Cognee integration for Laravel AI: RAG, conversation store, and content ingestion",
     "type": "library",
     "license": "MIT",
@@ -9,6 +13,18 @@
         "laravel/framework": "^11|^12",
         "agenticmorf/laravel-ai-model-manager": "*"
     },
+    "require-dev": {
+        "agenticmorf/fluxui-chat": "dev-main",
+        "christhompsontldr/laravel-docit": "^1.0",
+        "mockery/mockery": "^1.6",
+        "orchestra/pest-plugin-testbench": "^4.0",
+        "orchestra/testbench": "^10.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-mutate": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0",
+        "phpunit/phpunit": "^12.0"
+    },
     "suggest": {
         "agenticmorf/fluxui-chat": "For RAG context provider integration"
     },
@@ -17,6 +33,18 @@
             "AgenticMorf\\LaravelAICognee\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "AgenticMorf\\LaravelAICognee\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "docit": "php vendor/bin/build-docs",
+        "test": "bash -c 'cd ../.. && vendor/bin/pest plugins/laravel-ai-cognee/tests --configuration=plugins/laravel-ai-cognee/phpunit.xml'",
+        "test:coverage": "bash -c 'cd ../.. && XDEBUG_MODE=coverage vendor/bin/pest plugins/laravel-ai-cognee/tests --configuration=plugins/laravel-ai-cognee/phpunit.xml --coverage'",
+        "test:type-coverage": "bash -c 'cd ../.. && vendor/bin/pest plugins/laravel-ai-cognee/tests --configuration=plugins/laravel-ai-cognee/phpunit.xml --type-coverage'",
+        "test:mutation": "bash -c 'cd ../.. && XDEBUG_MODE=coverage vendor/bin/pest plugins/laravel-ai-cognee/tests --configuration=plugins/laravel-ai-cognee/phpunit.xml --mutate --everything --covered-only --class=AgenticMorf\\\\LaravelAICognee'"
+    },
     "extra": {
         "laravel": {
             "providers": [
@@ -24,5 +52,22 @@
             ]
         }
     },
-    "minimum-stability": "stable"
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/AgenticMorf/laravel-ai-model-manager",
+            "only": ["agenticmorf/laravel-ai-model-manager"]
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/AgenticMorf/fluxui-chat",
+            "only": ["agenticmorf/fluxui-chat"]
+        }
+    ]
 }

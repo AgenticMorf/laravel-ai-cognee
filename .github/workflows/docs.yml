@@ -1,0 +1,51 @@
+name: Build and Deploy Docs
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          composer config --global github-oauth.github.com ${{ secrets.GITHUB_TOKEN }}
+          composer install --no-interaction --prefer-dist
+
+      - name: Build docs
+        env:
+          DOCIT_PROJECT_ROOT: ${{ github.workspace }}
+          DOCIT_OUTPUT_DIR: docs/dist
+          DOCIT_BASE_PATH: /laravel-ai-cognee
+        run: php vendor/bin/build-docs
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/dist
+
+  deploy:
+    if: success()
+    needs: build
+    runs-on: ubuntu-latest
+    environment: github-pages
+    steps:
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
